@@ -63,21 +63,61 @@ The third and final stage is the implementation.
 
 This description should be sufficient to explain what the entity diagram is and what role it plays in the design process. This role will be explained further on.
 
-## What is an entity relationship diagram (ERD)?
-An entity relationship diagram is a model which can represent a part of reality needed for the system and also the database structure. Just like every model it represents a simplification of the real or database object it describes. At the stage of preliminary analysis the objects needed for our database are identified. The role of the entity diagram is to create models of these objects and relationships between them. The graphic character of the diagram makes it easier to understand the database structure. It is important to understand the relationships between the database objects which can often be quite complicated.
+## What is an entity relationship diagram (ERD)?  
+An **entity relationship diagram** is a model which can represent a part of reality needed for the system and also the database structure. Just like every model it represents a simplification of the real or database object it describes. At the stage of preliminary analysis the objects needed for our database are identified. The role of the entity diagram is to create models of these objects and relationships between them. The graphic character of the diagram makes it easier to understand the database structure. It is important to understand the relationships between the database objects which can often be quite complicated.
 
 The use case diagram presented in the previous lecture was basically the input data for graphical user interface (GUI). The entity relationship diagram has a different function as it is a model of the data structure. Thus, it puts aside client’s perspective of our application, or deals with it in a small extent.
 
 There is a list of requirements for a proper entity relationship diagram. It should
 
-Unambiguously present users’ requirements for the data stored in it,
+* Unambiguously present users’ requirements for the data stored in it,
 
-Allow to check if the analyst fully grasped the users’ requirements and the character of the environment in which the system will be utilized,
+* Allow to check if the analyst fully grasped the users’ requirements and the character of the environment in which the system will be utilized,
 
-Be much simpler from the database itself , as it puts aside the implementation details, which must be later developed by the database designer so that our database can exist and carry out its tasks.
+* Be much simpler from the database itself , as it puts aside the implementation details, which must be later developed by the database designer so that our database can exist and carry out its tasks.
 
 ### CASE (Computer Aided Software Engineering) tools
-Key to Key
+
+CASE tools are specialized programs which aid the designing of the information systems and allow to create various types of diagrams useful in the design process. The CASE tools provide graphic tools to design and draw diagrams on screen. The tools used to create the entity relationship diagrams must take into account the specific details of various database servers, for example the available data types. They should be (and usually are) able to translate the graphical version of the diagram into an SQL script. The script can then be run in the appropriate DBMS environment in order to generate all the database objects and integrity constraints.
+
+In our lectures diagrams are made in **Microsoft Visio for Enterprise Architects 2003.**
+
+The definition of an entity consists of the attributes (characteristics, properties) which are sufficient to unambiguously distinguish an entity from the other ones.
+
+We must distinguish the notion of entity as a class of objects and as an instance of this class, i.e. a single instance of the object (single copy) of a given type. For example the “PERSON” entity as a type defines attributes necessary to describe a certain group of people. Only after we substitute specific values for its attributes we obtain an instance of this entity which will represent a particular person. It should be emphasized that if the entity is used to describe a selected class of objects (in our example a specific group of people), each single object of this class (in our case each specific person) must be described with the same attributes. Note that it may be hard in practice to describe two different groups of people, e.g. a group of prisoners and a group of preschoolers, with the same attributes.
+
+But the principle:
+
+**Entia non sunt multiplicanda praeter necessitatem (novacula Occami) - entities must not be multiplied beyond necessity – known as the Occam's razor
+**
+… also relates to the databases!
+
+Entities are usually represented graphically as rectangles. The graphical representations of entities vary (slightly) according to the notation adopted by the specific CASE tool.
+
+### Attribute  
+
+It is crucial to correctly choose the attributes for describing an entity. Note that attributes represent certain abstract features or characteristics, not the specific values. The attribute of the Student entity is Name, not a specific value (say “Smith”) the attribute can take. The attribute should describe the entity rather than its relations with other entities, for instance in an airline’s database the attribute Seat_number should be an attribute of the Airliner entity, not Passenger, despite the fact that the passenger sits on a specific seat during the flight. In the same way the place won by an athlete in a competition is neither an attribute of the entity Athlete or Competition, but most preferably the Competition_results entity.
+
+Consider now the entity as a model for future table in the database. It is clear that the attributes are nothing else but the models for the future columns, specifying their names. If we also define their domains, i.e. we specify the data types we will use to store the values of the attribute, we will define the domains of the columns table.
+
+### First Normal Form (1NF)
+The concept of the “First Normal Form” (1NF) was formulated as one of the Codd’s rules. It is the first condition we must meet when we normalize the database structure. Its purpose is to eliminate any anomalies in the data insertion, modification and deletion as well as any uncontrolled data redundancy. The whole normalization process and the subsequent normal forms will be thoroughly discussed during the relational databases course in the future semesters.
+
+An entity (and thus also its corresponding table) is in the first normal form if:
+
+* It describes one type (one class) of objects; e.g. the information about the car owners and their cars IS NOT stored in a single entity that contains attributes of both the owners as well as the cars,
+
+* Its attribute values are elementary (atomic , indivisible) - each column represents a scalar (atomic) value rather than an array, list or anything that has its own structure; e.g. the Person entity DOES NOT include an attribute called Names which contains all the person’s names stored in a list.
+
+* It does not contain collections (i.e. repeating groups of information); e.g. in order to store the information about sportsmen we DO NOT ADD to the Athlete entity an attribute called Medals containing all the medals won by him or her.
+
+* It has a key, i.e. a set of attributes whose values distinguish each row from the other ones.
+
+The order of the attributes should not encode any information, i.e. any change in the order of attributes should have no influence on the information content; e.g. in order to record information about the competition results we DO NOT create an entity called Result with attributes Athlete 1, Athlete 2, Athlete 3, ...
+
+The above definition of the 1NF is a bit of an over-interpretation of the original one. The latter consists only of the first three points, but I allowed myself to extend it slightly for the sake of the further argument. All the information above is true and correct .
+
+### Key 
 The term "entity key" describes a set of entity's attributes whose values are unique (unambiguous) for its every instance. Similarly, the term "table key" describes a set of columns whose values will be unique (unambiguous) for every row in the table. Obviously it is possible that these sets contain only one element. Each table (entity) may contain none, one or more sets fulfilling the uniqueness condition, for example the Social security number or the PESEL can be the key in the Person entity or the Registration_number in the Car entity. However if there is no attribute with the uniqueness property in the entity we need to add an artificial attribute (column in the table) that meets this requirement. This is usually an attribute of integer type. The table column will then contain integers which uniquely identify the instances. But it can also be an attribute of the text type – e.g. the lecture code in the studies curriculum.
 
 If the entity has more than one set of attributes whose values meet the requirement of uniqueness for every instance of the entity, then you should arbitrarily choose one of them to act as the primary key. If the entity has only one set, then there is no dilemma involved - it automatically becomes a primary key. Thus, we can identify a few keys in the entity, but only one of them can be used as our primary key.
@@ -85,7 +125,6 @@ If the entity has more than one set of attributes whose values meet the requirem
 Every CASE tool allows us to select the attribute (or multiple attributes) as the primary key during the design phase of our diagram. The illustration below shows this process in MS Visio.
 
 ### Data types – attributes domains
-
 Data types or attribute domains are sets of values which can be stored by variables in the table columns. The principal types of data which we will encounter in every DBMS is the numeric type, the text type and the date type. For each of these types specific implementations provide a number of subtypes. For example: for a numeric type there is the two-byte integer and the four-byte one, the floating point number stored in four or eight bytes etc. Therefore we should find out what types are available before we start working in the specific DBMS environment.
 
 When we speak about the entity-relationship diagram as a model of the future database we operate on the level of abstract concepts. On the other hand, on the database level we are closer to the concrete implementation. Hence, at the conceptual level (entity-relationship diagram) we are talking about the domain types as a general concept. However when we implement the database in a specific DBMS we use the types of data specific to the database solution.
@@ -95,7 +134,6 @@ CASE tools usually offer a choice of one of these approaches - either operate on
 The following illustration shows the selection process of the attribute’s domain (data type) from the drop-down list representing the physical data types (Oracle Server).
 
 ### Relationship
-
 The relationship is defined as an ordered list of entities in the relational model. Individual entities can appear on the list multiple times. Each relationship defines a certain dependence between the sets of copies (instances) of the entities belonging to it. This correlation is called the instance of the relationship. In other words an instance of the relationship is the relationship between the entities instances. For example, the relationship between the Person entities and the Car entities can be described as the OwnerOfTheCar. Every instance of the Person entity will be able to have a relationship with an instance of the Car entity thus creating information about the cars and their owners.
 
 The relationship can be formally represented using the relational notation:
@@ -106,15 +144,15 @@ which means: entities E1 , ..., En are included in the Z relationship
 
 You can also describe the relationship verbally, e.g.:
 
-An employee works in a department (relationship between the Employee and the Department entity)
+* An employee works in a department (relationship between the Employee and the Department entity)
 
-An employee has a specific function in the project (relationship between the Employee and the Project entity)
+* An employee has a specific function in the project (relationship between the Employee and the Project entity)
 
-The company produces goods (relationship between the Company and the Goods entity)
+* The company produces goods (relationship between the Company and the Goods entity)
 
 In practice, when designing a database, we define relationships through their verbal description.
  
-### Binary relationship  
+### Binary relationship
 Binary relationship is a relationship that exists between two entities. It is represented graphically as a line connecting two frames (entities). An instance of a binary relationship is a two argument relation in the Cartesian product of the entities instances collections.
 
 The graph below shows the relationship between the Student and the City entities . This relationship can be described as follows: every student was born in a city, each student in ONE city, but… many students could have been born in ONE city.
