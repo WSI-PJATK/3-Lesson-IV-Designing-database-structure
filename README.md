@@ -51,15 +51,15 @@ As mentioned before, a database is usually part of the entire information system
 
 From the database designer’s point of view the next to the last question concerning functionality of the future database is the most important one. However the answer to this question depends on the answers to the other questions.
 
-The problems discussed above belong to the analysis stage of the designing process.
+The problems discussed above belong to the **analysis stage** of the designing process.
 
-Then comes the project stage, in which the future system documentation is written. We should also make a detailed description of the system’s functions and define its users (“actors”). At the same time we should outline the structure of the database in a way which guarantees the possibility to record all the required data. We should also define all the integrity constraints, guaranteeing the logical consistency of data.
+Then comes the **project stage**, in which the future system documentation is written. We should also make a detailed description of the system’s functions and define its users (“actors”). At the same time we should outline the structure of the database in a way which guarantees the possibility to record all the required data. We should also define all the integrity constraints, guaranteeing the logical consistency of data.
 
-The documentation of the system functions and the definition of the actors is often presented in the form of a use case diagram.
+The documentation of the system functions and the definition of the actors is often presented in the form of a **use case diagram.**
 
-On the other hand, the implementation model of a database can be represented by the entity relationship diagram.
+On the other hand, the implementation model of a database can be represented by the **entity relationship diagram.**
 
-The third and final stage is the implementation.
+The third and final stage is the **implementation**.
 
 This description should be sufficient to explain what the entity diagram is and what role it plays in the design process. This role will be explained further on.
 
@@ -82,7 +82,7 @@ CASE tools are specialized programs which aid the designing of the information s
 
 In our lectures diagrams are made in **Microsoft Visio for Enterprise Architects 2003.**
 
-## Entity
+### Entity
 
 **Entity** (lat. **Entia**) – an entity is a singular, independent object which can be described and whose description can be stored in database.
 
