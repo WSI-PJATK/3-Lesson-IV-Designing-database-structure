@@ -223,3 +223,80 @@ When we define a relationship in a CASE tool, an attribute is automatically adde
 Thus we have added a `foreign key` to the entity attributes. It will serve as a pointer linking the rows on the “many” side with one row on the “one” side of the relationship.
 
 In our example MS Visio has automatically created in the `Student` entity the attribute `IdMiasto` (labeled FK1 - foreign key), defining the relationship between the instances of the `Student` entity with the instances of the `City` entity.
+
+## Working with MS Visio
+
+In the previous section we discussed the concept of an entity and an entity relationship. 
+
+I tried to convey the meaning of these terms. However, as mentioned above, the practical process of creating the entity relationship diagrams is made using specialized CASE tools. 
+
+In this section we present the Microsoft CASE tool called MS Visio. 
+
+We discuss here a version of the MS Visio for Enterprise Architects included in the MS Office 2003, because it is the last version of this program equipped with full functionality we expect from a CASE program.
+
+We will also present the newer version MS Visio 2007, unfortunately already deprived of some of its functionality, but sufficient for the learning purposes within the WSI course. 
+
+The MS Visio 2010, available for the students under the academic license at https://software.pjwstk.edu.pl/, is almost identical. 
+
+The latest version of MS Visio 2013, on the other hand, is not suitable for the tasks we will deal with during this course.
+
+
+Below are short videos in the MP4 format presenting the basics of working with the MS Visio. These materials are not intended to teach you every detail of creating the entity relationship diagrams, but rather to demonstrate how to use this tool.
+
+Running MS Visio 2003
+In links below are video files which present MS Visio use, which should be attached to the lectures.
+Z:\PBD_nagrania\Uruchomienie Visio
+
+Running MS Visio 2010
+Z:\PBD_nagrania\Uruchomienie Visio 2010
+
+Creating entities with MS Visio
+Z:\PBD_nagrania\Tworzenie encji w MS Visio
+
+Creating relationships with MS Visio
+Z:\PBD_nagrania\Tworzenie związków w MS Visio
+
+But what do we need these diagrams for?
+In this chapter we presented the process of designing a database by creating the entity relationship diagrams. We have already said that the entities and their relationships can be thought of as models of some parts of the real world, but at the same time they represent the structure of the future database. But do we obtain from such diagrams something more than just a convenient image of the database structure? Graphic representation of the tables and relationships makes it easier to work with the future database, but is it everything we get? It turns out that the CASE tools have one more (very important) function. Namely, they can generate a DDL script which creates a database. What is a DDL (“Data Definition Language”) script? This is a set of SQL text commands, and in fact also a subset of commands used for creating the database objects. The database server is able to interpret these commands and create a database whose structure has been designed in the form of the entity-relationship diagram.
+
+
+Unfortunately, among the tools implemented by the currently available student version of the Visio 2010 there is no DDL generation tool. It is included in the MS Visio for Enterprise Architects (Visio 2003) and is available on the computers in PJATK laboratory. MP4 video below shows how to generate the DDL script of the entity relationship diagram in the MS Visio 2003.
+
+Generating DDL script from the MS Visio
+Z:\PBD_nagrania\Generowanie skryptu DDL z MS Visio
+
+Other notations used for creating entity relationship diagrams
+As previously mentioned, there is no standard for the notation used in the entity relationship diagrams. You could say that every CASE tool introduces its own notation, although most of them are quite similar. However, the notation used in MS Visio (called relational) is quite distinct and rare. Below we present a few examples of the most commonly used notations. The first diagram was made in a relational notation, while the other ones were created in various notations different from the one used in MS Visio.
+
+### Relational notation
+
+We first encountered the relational notation while working with MS Visio - this is the basic notation used in this tool. The designations used are simple, yet the diagram contains little information in the graphic layer.
+
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_28.png)
+
+### IDEF1X notation
+
+The same diagram made in MS Visio, but with the IDEF1X notation. Try to figure out what the signs mean. They will be thoroughly discussed in a different course called “Relational Databases”.
+
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_29.png)
+
+Once again, the same diagram made in the IDEF1X notation, but with a different CASE tool called Erwin. Unlike the previous ones it can represent an ambiguous relationship (many - to - many) on a diagram without decomposing it into two unambiguous relationships and an associative entity. Of course this will have to be done later at the implementation stage.
+
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_37.png)
+
+### Crow’s Foot notation
+
+The name of this notation comes from the symbol of the "many" side of the relationship - the symbol of three lines which is similar to the imprint of a crow’s foot. This example was done using the IBM's Relational Data Architect.
+
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_31.png)
+
+### Summary
+
+This lecture is an introduction to the design process of an information system, with particular emphasis on the design of the database. 
+
+We emphasized the role of the CASE tools in the design process as well as the role of the entity-relationship diagram as a model of the future database. 
+
+We presented and discussed the basic ERD elements: the entity, the attribute and the relationship and showed examples of the simple entity relationship diagrams in several different notations. 
+
+The whole issue of the relational database design will be discussed in detail in a different course called “Relational Databases”.
+
