@@ -82,25 +82,50 @@ CASE tools are specialized programs which aid the designing of the information s
 
 In our lectures diagrams are made in **Microsoft Visio for Enterprise Architects 2003.**
 
+## Entity
+
+**Entity** (lat. **Entia**) – an entity is a singular, independent object which can be described and whose description can be stored in database.
+
+In the world of databases, the term entity is used to describe (model) things (objects phenomena, relationships etc.) about which we will collect data in our database. Every entity has a name that must be unique for a given database.
+
 The definition of an entity consists of the attributes (characteristics, properties) which are sufficient to unambiguously distinguish an entity from the other ones.
 
-We must distinguish the notion of entity as a class of objects and as an instance of this class, i.e. a single instance of the object (single copy) of a given type. For example the “PERSON” entity as a type defines attributes necessary to describe a certain group of people. Only after we substitute specific values for its attributes we obtain an instance of this entity which will represent a particular person. It should be emphasized that if the entity is used to describe a selected class of objects (in our example a specific group of people), each single object of this class (in our case each specific person) must be described with the same attributes. Note that it may be hard in practice to describe two different groups of people, e.g. a group of prisoners and a group of preschoolers, with the same attributes.
+We need to distinguish between the idea of an entity as a group of objects and as an individual within that group, referring to a single occurrence of a particular type of object (single copy).
 
-But the principle:
+The entity type "PERSON" defines attributes needed to describe a particular group of people.
 
-**Entia non sunt multiplicanda praeter necessitatem (novacula Occami) - entities must not be multiplied beyond necessity – known as the Occam's razor
-**
-… also relates to the databases!
+Only when we replace specific values for its attributes do we obtain an instance of this entity that will represent a particular person.
+
+It should be emphasized that if the entity is used to describe a selected class of objects (in our example a specific group of people), each single object of this class (in our case each specific person) must be described with the same attributes. 
+
+Describing two different groups of people, such as prisoners and preschoolers, with the same attributes may be challenging in practice.
+
+But remember: **Occam's razor**, which states that **entities should not be multiplied beyond necessity**, also applies to databases!
 
 Entities are usually represented graphically as rectangles. The graphical representations of entities vary (slightly) according to the notation adopted by the specific CASE tool.
 
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_38.png)  
+
 ### Attribute  
 
-It is crucial to correctly choose the attributes for describing an entity. Note that attributes represent certain abstract features or characteristics, not the specific values. The attribute of the Student entity is Name, not a specific value (say “Smith”) the attribute can take. The attribute should describe the entity rather than its relations with other entities, for instance in an airline’s database the attribute Seat_number should be an attribute of the Airliner entity, not Passenger, despite the fact that the passenger sits on a specific seat during the flight. In the same way the place won by an athlete in a competition is neither an attribute of the entity Athlete or Competition, but most preferably the Competition_results entity.
+Choosing the right attributes is essential when describing an entity.
 
-Consider now the entity as a model for future table in the database. It is clear that the attributes are nothing else but the models for the future columns, specifying their names. If we also define their domains, i.e. we specify the data types we will use to store the values of the attribute, we will define the domains of the columns table.
+Note that attributes represent certain abstract features or characteristics, not the specific values. 
+
+The attribute of the `Student` entity is `Name`, not a specific value (say “Smith”) the attribute can take. 
+
+The attribute should describe the entity rather than its relations with other entities, for instance in an airline’s database the attribute `Seat_number` should be an attribute of the `Airliner` entity, not `Passenger`, despite the fact that the passenger sits on a specific seat during the flight. 
+
+In the same way the place won by an athlete in a competition is neither an attribute of the entity `Athlete` or `Competition`, but most preferably the `Competition_results` entity.
+
+Consider now the entity as a model for future table in the database. 
+
+It is clear that the **attributes** are nothing else but the models for the future **columns**, specifying their names. 
+
+If we also define their domains, i.e. we specify the data types we will use to store the values of the attribute, we will define the domains of the columns table.
 
 ### First Normal Form (1NF)
+
 The concept of the “First Normal Form” (1NF) was formulated as one of the Codd’s rules. It is the first condition we must meet when we normalize the database structure. Its purpose is to eliminate any anomalies in the data insertion, modification and deletion as well as any uncontrolled data redundancy. The whole normalization process and the subsequent normal forms will be thoroughly discussed during the relational databases course in the future semesters.
 
 An entity (and thus also its corresponding table) is in the first normal form if:
@@ -118,51 +143,83 @@ The order of the attributes should not encode any information, i.e. any change i
 The above definition of the 1NF is a bit of an over-interpretation of the original one. The latter consists only of the first three points, but I allowed myself to extend it slightly for the sake of the further argument. All the information above is true and correct .
 
 ### Key 
+
 The term "entity key" describes a set of entity's attributes whose values are unique (unambiguous) for its every instance. Similarly, the term "table key" describes a set of columns whose values will be unique (unambiguous) for every row in the table. Obviously it is possible that these sets contain only one element. Each table (entity) may contain none, one or more sets fulfilling the uniqueness condition, for example the Social security number or the PESEL can be the key in the Person entity or the Registration_number in the Car entity. However if there is no attribute with the uniqueness property in the entity we need to add an artificial attribute (column in the table) that meets this requirement. This is usually an attribute of integer type. The table column will then contain integers which uniquely identify the instances. But it can also be an attribute of the text type – e.g. the lecture code in the studies curriculum.
 
 If the entity has more than one set of attributes whose values meet the requirement of uniqueness for every instance of the entity, then you should arbitrarily choose one of them to act as the primary key. If the entity has only one set, then there is no dilemma involved - it automatically becomes a primary key. Thus, we can identify a few keys in the entity, but only one of them can be used as our primary key.
 
 Every CASE tool allows us to select the attribute (or multiple attributes) as the primary key during the design phase of our diagram. The illustration below shows this process in MS Visio.
 
-### Data types – attributes domains
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_33.png)
+
+### Data types – attributes domains  
+
 Data types or attribute domains are sets of values which can be stored by variables in the table columns. The principal types of data which we will encounter in every DBMS is the numeric type, the text type and the date type. For each of these types specific implementations provide a number of subtypes. For example: for a numeric type there is the two-byte integer and the four-byte one, the floating point number stored in four or eight bytes etc. Therefore we should find out what types are available before we start working in the specific DBMS environment.
 
 When we speak about the entity-relationship diagram as a model of the future database we operate on the level of abstract concepts. On the other hand, on the database level we are closer to the concrete implementation. Hence, at the conceptual level (entity-relationship diagram) we are talking about the domain types as a general concept. However when we implement the database in a specific DBMS we use the types of data specific to the database solution.
 
 CASE tools usually offer a choice of one of these approaches - either operate on universal data types not associated with a particular DBMS or choose data types implemented in the specific DBMS. MS Visio distinguishes between these two specifications of the data types. We can choose platform independent data types (Portable Data Type) or database specific data types (Physical Data Type).
 
-The following illustration shows the selection process of the attribute’s domain (data type) from the drop-down list representing the physical data types (Oracle Server).
+The following illustration shows the selection process of the attribute’s domain (data type) from the drop-down list representing the physical data types (Oracle Server).  
+
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_35.png)
 
 ### Relationship
-The relationship is defined as an ordered list of entities in the relational model. Individual entities can appear on the list multiple times. Each relationship defines a certain dependence between the sets of copies (instances) of the entities belonging to it. This correlation is called the instance of the relationship. In other words an instance of the relationship is the relationship between the entities instances. For example, the relationship between the Person entities and the Car entities can be described as the OwnerOfTheCar. Every instance of the Person entity will be able to have a relationship with an instance of the Car entity thus creating information about the cars and their owners.
+
+The relationship is defined as an ordered list of entities in the relational model. 
+
+Individual entities can appear on the list multiple times. Each relationship defines a certain dependence between the sets of copies (instances) of the entities belonging to it. 
+
+This correlation is called the instance of the relationship. In other words an instance of the relationship is the relationship between the entities instances. 
+
+For example, the relationship between the Person entities and the Car entities can be described as the OwnerOfTheCar. Every instance of the Person entity will be able to have a relationship with an instance of the Car entity thus creating information about the cars and their owners.
 
 The relationship can be formally represented using the relational notation:
 
-Z(E1 ,...,En)
+**Z(E1 ,...,En)**
 
-which means: entities E1 , ..., En are included in the Z relationship
+which means: entities **E1 , ..., En** are included in the **Z** relationship
 
 You can also describe the relationship verbally, e.g.:
 
-* An employee works in a department (relationship between the Employee and the Department entity)
+* **An employee works in a department** (relationship between the Employee and the Department entity)
 
-* An employee has a specific function in the project (relationship between the Employee and the Project entity)
+* **An employee has a specific function in the project** (relationship between the Employee and the Project entity)
 
-* The company produces goods (relationship between the Company and the Goods entity)
+* **The company produces goods** (relationship between the Company and the Goods entity)
 
 In practice, when designing a database, we define relationships through their verbal description.
  
 ### Binary relationship
-Binary relationship is a relationship that exists between two entities. It is represented graphically as a line connecting two frames (entities). An instance of a binary relationship is a two argument relation in the Cartesian product of the entities instances collections.
+
+**Binary relationship** is a relationship that exists between two entities. 
+
+It is represented graphically as a line connecting two frames (entities). 
+
+**An instance of a binary relationship** is a two argument relation in the Cartesian product of the entities instances collections.
 
 The graph below shows the relationship between the Student and the City entities . This relationship can be described as follows: every student was born in a city, each student in ONE city, but… many students could have been born in ONE city.
 
+![](https://gakko.pjwstk.edu.pl/public/7164/WSI_36.png)
+
 After defining the relationship in the CASE tool (in our case MS Visio), the primary key from one entity forming the relationship is transferred to the entity on the other side of the relationship. This way we can create a foreign key.
 
-In the first lecture we described the example of the Course and Lecturer tables and a relationship between them: for each course there is one teacher responsible, but one teacher may be responsible for several courses. In that example, the ID of a lecturer was placed in the Courses table and served as the indicator in order to determine which teacher is responsible for that item. A similar case is shown in the example above. The city ID (i.e. primary key of the City entity) is placed in the Student entity in order to indicate his or her place of birth. One instance of the Student entity is associated with one instance of the City entity, thus creating a single instance of a relationship.
+In the first lecture we described the example of the Course and Lecturer tables and a relationship between them: for each course there is one teacher responsible, but one teacher may be responsible for several courses. 
 
-Let us go back to the definition of the relationship as an ORDERED list of entities. The relationship in our example can be described as follows: ONE student was born in ONE city, but in ONE city MANY students could have been born. This definition is not symmetric! For each student you can specify one city where he or she was born, but for each city we can potentially find many students who were born in it. A relationship of this kind is called a one-to-many relationship. Here the entity City is located on the ONE side of the relationship and entity Student on the MANY side. We also use other names: Student represents the child entity and City represents the parent entity.
+In that example, the ID of a lecturer was placed in the Courses table and served as the indicator in order to determine which teacher is responsible for that item. A similar case is shown in the example above. 
 
-When we define a relationship in a CASE tool, an attribute is automatically added to the entity on the “many” side, containing the value of the primary key of the other entity. Thus we have added a foreign key to the entity attributes. It will serve as a pointer linking the rows on the “many” side with one row on the “one” side of the relationship.
+The city ID (i.e. primary key of the City entity) is placed in the Student entity in order to indicate his or her place of birth. 
 
-In our example MS Visio has automatically created in the Student entity the attribute IdMiasto (labeled FK1 - foreign key), defining the relationship between the instances of the Student entity with the instances of the City entity.
+One instance of the `Student` entity is associated with one instance of the `City` entity, thus creating a single instance of a relationship.
+
+Let us go back to the definition of the relationship as an ORDERED list of entities. The relationship in our example can be described as follows: ONE student was born in ONE city, but in ONE city MANY students could have been born. 
+
+This definition is not symmetric! For each student you can specify one city where he or she was born, but for each city we can potentially find many students who were born in it. 
+
+A relationship of this kind is called a one-to-many relationship. Here the entity `City` is located on the **ONE** side of the relationship and entity `Student` on the **MANY** side. We also use other names: `Student` represents the child entity and `City` represents the **parent entity.**
+
+When we define a relationship in a CASE tool, an attribute is automatically added to the entity on the “many” side, containing the value of the primary key of the other entity. 
+
+Thus we have added a `foreign key` to the entity attributes. It will serve as a pointer linking the rows on the “many” side with one row on the “one” side of the relationship.
+
+In our example MS Visio has automatically created in the `Student` entity the attribute `IdMiasto` (labeled FK1 - foreign key), defining the relationship between the instances of the `Student` entity with the instances of the `City` entity.
